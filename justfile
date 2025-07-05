@@ -76,11 +76,16 @@ new-mode name:
     @echo "✅ Created aliases/{{name}}"
     @echo "📝 Edit the file and run 'just build' to generate scripts"
 
+# Bootstrap the modular loading system
+bootstrap:
+    @./setup-modular-loading.sh
+
 # Show help
 help:
     @echo "just-aliases - Modal alias system for Zsh"
     @echo ""
     @echo "Available commands:"
+    @echo "  just bootstrap    - Set up modular loading system"
     @echo "  just build        - Build all mode scripts"
     @echo "  just source       - Source shell integration"
     @echo "  just install      - Build and show install instructions"
@@ -100,11 +105,12 @@ help:
     @echo "  just global-list   - List modes globally"
     @echo ""
     @echo "Usage:"
-    @echo "  1. just build     # Generate scripts"
-    @echo "  2. just source    # Enable in current shell"
-    @echo "  3. ja             # Switch modes interactively"
-    @echo "  4. xj             # Bootstrap from anywhere"
-    @echo "  5. gj <command>   # Use global commands from anywhere"
+    @echo "  1. just bootstrap # Set up modular loading"
+    @echo "  2. just build     # Generate scripts"
+    @echo "  3. just source    # Enable in current shell"
+    @echo "  4. ja             # Switch modes interactively"
+    @echo "  5. xj             # Bootstrap from anywhere"
+    @echo "  6. gj <command>   # Use global commands from anywhere"
 
 # Development helpers
 dev-setup: build
