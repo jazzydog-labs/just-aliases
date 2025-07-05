@@ -161,6 +161,67 @@ function _ja_completion() {
 # Register completion for ja-switch function
 compdef _ja_completion ja-switch
 
+# Cross-directory bootstrap function
+function xj() {
+    local ja_dir="$HOME/dev/jazzydog-labs/foundry/just-aliases"
+    local global_dir="$HOME/.just-aliases"
+    
+    # Check if global installation exists
+    if [[ -f "$global_dir/justfile" ]]; then
+        echo "🌍 Using global just-aliases installation..."
+        just -f "$global_dir/justfile" all
+        return 0
+    fi
+    
+    # Fallback to local installation
+    if [[ ! -d "$ja_dir" ]]; then
+        echo "❌ Just-aliases directory not found at $ja_dir"
+        echo "❌ Global installation not found at $global_dir"
+        return 1
+    fi
+    
+    # Save current directory
+    local current_dir=$(pwd)
+    
+    # Change to just-aliases directory
+    cd "$ja_dir"
+    
+    # Source the integration file to get access to jall
+    if [[ -f "just-aliases.zsh" ]]; then
+        source just-aliases.zsh
+    fi
+    
+    # Run jall (which will build, source, and switch to build mode)
+    if command -v jall >/dev/null 2>&1; then
+        jall
+    else
+        echo "❌ jall command not found. Running manual bootstrap..."
+        # Manual bootstrap: build, source, switch to build
+        python just_aliases.py build
+        source just-aliases.zsh
+        ja switch build
+    fi
+    
+    # Change back to original directory
+    cd "$current_dir"
+    
+    echo "✅ Just-aliases bootstrapped from $ja_dir"
+    echo "💡 You can now use 'ja' commands from anywhere!"
+}
+
+# Global just-aliases function
+function gj() {
+    local global_dir="$HOME/.just-aliases"
+    
+    if [[ ! -f "$global_dir/justfile" ]]; then
+        echo "❌ Global just-aliases installation not found at $global_dir"
+        echo "💡 Run 'xj' first to bootstrap the system"
+        return 1
+    fi
+    
+    just -f "$global_dir/justfile" "$@"
+}
+
 # Help function
 function ja-help() {
     echo "just-aliases - Modal alias system for Zsh"
@@ -173,10 +234,14 @@ function ja-help() {
     echo "  ja-current            - Show current active mode"
     echo "  ja-clear              - Clear current mode"
     echo "  build-aliases         - Build mode scripts from aliases/ directory"
+    echo "  xj                    - Bootstrap just-aliases from anywhere"
+    echo "  gj <command>          - Use global just-aliases commands from anywhere"
     echo "  ja-help               - Show this help"
     echo ""
     echo "Usage:"
     echo "  1. Create mode files in the aliases/ directory"
     echo "  2. Run 'build-aliases' to generate scripts"
     echo "  3. Use 'ja' to switch between modes"
+    echo "  4. Use 'xj' to bootstrap from anywhere"
+    echo "  5. Use 'gj <command>' for global commands from anywhere"
 } 

@@ -8,7 +8,7 @@ default:
 # Build all mode scripts from aliases/ directory
 build:
     @echo "🔨 Building alias scripts..."
-    python build-aliases.py
+    python just_aliases.py build
 
 # Source the shell integration in current shell
 source:
@@ -24,22 +24,25 @@ install: build
 test:
     @echo "🧪 Testing just-aliases..."
     @echo "Listing available modes:"
-    python mode_manager.py list
+    python just_aliases.py list
 
 # Interactive mode selection
 interactive:
     @echo "🎯 Interactive mode selection..."
-    python mode_manager.py
+    source just-aliases.zsh
+    ja
 
 # Switch to a specific mode
 switch mode:
     @echo "🔄 Switching to mode: {{mode}}"
-    python mode_manager.py switch {{mode}}
+    source just-aliases.zsh
+    ja switch {{mode}}
 
 # Show current active mode
 current:
     @echo "📋 Current active mode:"
-    python mode_manager.py list
+    source just-aliases.zsh
+    ja-current
 
 # Clean generated files
 clean:
@@ -90,10 +93,18 @@ help:
     @echo "  just new-mode <name> - Create a new mode"
     @echo "  just help         - Show this help"
     @echo ""
+    @echo "Global commands (use from anywhere):"
+    @echo "  just global-build  - Build using global installation"
+    @echo "  just global-all    - Bootstrap using global installation"
+    @echo "  just global-switch <mode> - Switch mode globally"
+    @echo "  just global-list   - List modes globally"
+    @echo ""
     @echo "Usage:"
     @echo "  1. just build     # Generate scripts"
     @echo "  2. just source    # Enable in current shell"
     @echo "  3. ja             # Switch modes interactively"
+    @echo "  4. xj             # Bootstrap from anywhere"
+    @echo "  5. gj <command>   # Use global commands from anywhere"
 
 # Development helpers
 dev-setup: build
@@ -109,7 +120,40 @@ test-mode mode:
         cat aliases/{{mode}}; \
         echo ""; \
         echo "Generated scripts:"; \
-        ls -la .cache/just-aliases/{{mode}}-* 2>/dev/null || echo "  No scripts found (run 'just build')"; \
+        ls -la scripts/apply_{{mode}}.zsh 2>/dev/null || echo "  No scripts found (run 'just build')"; \
     else \
         echo "❌ Mode '{{mode}}' not found"; \
-    fi 
+    fi
+
+# Global commands (use from anywhere)
+global-build:
+    @echo "🌍 Building using global installation..."
+    just -f ~/.just-aliases/justfile build
+
+global-source:
+    @echo "🌍 Sourcing using global installation..."
+    just -f ~/.just-aliases/justfile source
+
+global-switch mode:
+    @echo "🌍 Switching to mode: {{mode}} using global installation..."
+    just -f ~/.just-aliases/justfile switch {{mode}}
+
+global-list:
+    @echo "🌍 Listing modes using global installation..."
+    just -f ~/.just-aliases/justfile list
+
+global-current:
+    @echo "🌍 Current mode using global installation..."
+    just -f ~/.just-aliases/justfile current
+
+global-clear:
+    @echo "🌍 Clearing mode using global installation..."
+    just -f ~/.just-aliases/justfile clear
+
+global-all:
+    @echo "🌍 Bootstrap using global installation..."
+    just -f ~/.just-aliases/justfile all
+
+global-help:
+    @echo "🌍 Help using global installation..."
+    just -f ~/.just-aliases/justfile help 
