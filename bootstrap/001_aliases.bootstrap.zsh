@@ -14,3 +14,6 @@ alias sz="source ~/.zshrc"
 
 alias ld="loom details"
 alias l="loom"
+
+# editing helpers
+alias cu="cursor" # we use c for clear
