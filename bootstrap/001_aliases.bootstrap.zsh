@@ -11,3 +11,6 @@ alias -- -="cd -"
 
 # bootstrapping helpers
 alias sz="source ~/.zshrc"
+
+alias ld="loom details"
+alias l="loom"
