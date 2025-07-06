@@ -15,7 +15,7 @@ You are building a modal alias system for Zsh called just-aliases. Each mode cor
 
 ### UX
 
-- A shell function `m` is provided.
+- A shell function `ja` is provided.
     
     - It invokes a Python script to show all available modes (based on the files in `aliases/`).
         

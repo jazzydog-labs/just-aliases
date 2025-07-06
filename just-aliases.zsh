@@ -1,7 +1,7 @@
 # just-aliases - Modal alias system for Zsh
 # 
 # This file provides the shell integration for the modal alias system.
-# Source this file in your .zshrc to enable the 'm' function.
+# Source this file in your .zshrc to enable the `ja` function.
 
 # Active mode tracking variable
 export __just_aliases_active_mode=""
