@@ -31,3 +31,4 @@ if alias | grep -q "g"; then
 fi
 # testing helpers
 alias jt="just test"
+alias r="glow"

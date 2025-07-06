@@ -73,6 +73,31 @@ function fb() {
     fi
 }
 
+# cru goes to jazzydog-labs/crucible, runs `./cru blueprint`, then changes back to the original directory
+# follows the same pattern as foundry-bootstrap
+function cru() {
+    local cru_dir="$HOME/dev/jazzydog-labs/foundry/crucible"
+    local current_dir=$(pwd)
+    
+    if [[ ! -d "$cru_dir" ]]; then
+        echo "❌ Crucible directory not found at $cru_dir"
+        return 1
+    fi
+    
+    if [[ $(get_config "expert-mode") == "false" ]]; then
+        echo "🚀 Running crucible blueprint..."
+    fi
+    
+    # Change to crucible directory
+    cd "$cru_dir"
+    
+    # Run bootstrap
+    ./cru blueprint
+
+    # Change back to original directory
+    cd "$current_dir"
+}
+
 # Navigate to a loom project directory
 # Usage: lg <project-name>
 lg() { 
@@ -151,6 +176,8 @@ lg() {
     # 7. echo success
     echo "✅ Navigated to $project_dir"
 }
+
+
 
 # Open TODO.md file in Cursor at git repo root (create if doesn't exist)
 function todo() {
