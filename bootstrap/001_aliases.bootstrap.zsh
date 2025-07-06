@@ -17,3 +17,7 @@ alias l="loom"
 
 # editing helpers
 alias cu="cursor" # we use c for clear
+
+if alias | grep -q "gg"; then
+    unalias gg
+fi
