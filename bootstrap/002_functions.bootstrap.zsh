@@ -151,3 +151,35 @@ lg() {
     # 7. echo success
     echo "✅ Navigated to $project_dir"
 }
+
+# Open TODO.md file in Cursor at git repo root (create if doesn't exist)
+function todo() {
+    # Get git repo root using git command
+    local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    
+    if [[ -z "$git_root" ]]; then
+        echo "❌ Not in a git repository"
+        return 1
+    fi
+    
+    local readme_file="$git_root/TODO.md"
+    
+    # Create TODO.md if it doesn't exist
+    if [[ ! -f "$readme_file" ]]; then
+        echo "📝 Creating TODO.md at git root: $git_root"
+        touch "$readme_file"
+    else
+        echo "📝 Opening existing TODO.md: $readme_file"
+    fi
+    
+    # Open in Cursor
+    cursor "$readme_file"
+}
+
+# ts stands for todo show, using:
+function ts() {
+    # get the current directory
+    local current_dir=$(pwd)
+    # run the rg command
+    rg --line-number --context 2 --fixed-strings 'TODO:' "$current_dir"
+}
