@@ -44,3 +44,16 @@ just-aliases.zsh   # shell integration
 ```
 
 See `documents/high-level-idea.md` for the broader design goals.
+
+## Uninstall
+
+To remove all files that just-aliases creates on your system run:
+
+```bash
+just uninstall
+```
+
+This deletes the custom oh-my-zsh scripts, the global installation at
+`~/.just-aliases`, the configuration directory and any snippets added to your
+`~/.zshrc`.  See `documents/integration-points.md` for a complete list of
+touchpoints.
