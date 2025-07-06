@@ -21,3 +21,7 @@ alias cu="cursor" # we use c for clear
 if alias | grep -q "gg"; then
     unalias gg
 fi
+
+
+# testing helpers
+alias jt="just test"
