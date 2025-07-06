@@ -23,5 +23,11 @@ if alias | grep -q "gg"; then
 fi
 
 
+# development helpers
+alias lp="loom sync --push"
+# g function with completion is now defined in 002_functions.bootstrap.zsh
+if alias | grep -q "g"; then
+    unalias g
+fi
 # testing helpers
 alias jt="just test"

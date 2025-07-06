@@ -183,3 +183,40 @@ function ts() {
     # run the rg command
     rg --line-number --context 2 --fixed-strings 'TODO:' "$current_dir"
 }
+
+
+# Navigate to a loom project directory with autocomplete
+# Usage: g <project-name>
+# This is a wrapper around lg that provides autocomplete for loom repos
+function g() {
+    lg "$@"
+}
+
+# Completion function for loom repos
+function _g_completion() {
+    local -a loom_repos
+    loom_repos=(
+        "riverrun"
+        "panorama"
+        "bill-of-materials"
+        "just-aliases"
+        "loom"
+        "forge"
+        "crucible"
+        "vault"
+        "ledger"
+        "foundry-bootstrap"
+    )
+    
+    _describe 'loom repos' loom_repos
+}
+
+# Initialize completion system and register the completion function
+if [[ -n ${ZSH_VERSION-} ]]; then
+    # Ensure completion system is loaded
+    autoload -U compinit
+    compinit -d ~/.zcompdump
+    
+    # Register the completion function
+    compdef _g_completion g
+fi

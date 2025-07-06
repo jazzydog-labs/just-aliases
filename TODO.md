@@ -1,3 +1,6 @@
+# priority
+- [x] add autocomplete for repos with g/lg
+
 
 ## workflow
 - add some aliases for:
