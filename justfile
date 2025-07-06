@@ -162,4 +162,8 @@ global-all:
 
 global-help:
     @echo "🌍 Help using global installation..."
-    just -f ~/.just-aliases/justfile help 
+    just -f ~/.just-aliases/justfile help
+
+# Remove all system touchpoints installed by just-aliases
+uninstall:
+    @./uninstall.sh

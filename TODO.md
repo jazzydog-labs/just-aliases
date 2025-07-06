@@ -6,7 +6,7 @@
     - managing tmux sessions/windows...maybe we manage them and switch automatically
     - checking some cron jobs or something that automatically update a terminal if its become stale... if we didn't do anything for several minutes it will show a notification that we will have something to do there
     - loom go can keep track of events that are queued up and that we wanna visit (e.g. loom go next)
-        - loom go can figure out context of what it wants to do
+    - loom go can figure out context of what it wants to do
 
 - we want to have some way of grepping for todos in all the files in the directory
     - this means we need a pattern for all files in the directory that may have todos
@@ -31,3 +31,8 @@
     - opening project test coverage reports
     - opening project dependency/license reports
     - opening project security scan reports
+
+## touchpoint tracking
+- implement a schema describing all integration points (files, directories, zshrc snippets)
+- expose a command that lists these touchpoints
+- validate that `uninstall` removes everything defined in the schema
