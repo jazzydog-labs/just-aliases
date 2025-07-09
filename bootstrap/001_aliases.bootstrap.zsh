@@ -32,3 +32,5 @@ fi
 # testing helpers
 alias jt="just test"
 alias r="glow"
+alias t='tree -I "__pycache__|node_modules|htmlcov"'
+alias j="just"
