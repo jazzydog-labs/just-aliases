@@ -65,6 +65,22 @@ if [[ "$EXPERT_MODE" == "false" ]]; then
     echo "✅ Added modular loading code to .zshrc"
 fi
 
+# Setup Claude commands
+CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
+mkdir -p "$CLAUDE_COMMANDS_DIR"
+
+# Copy commands from local commands directory if it exists
+if [[ -d "commands" ]]; then
+    cp -r commands/* "$CLAUDE_COMMANDS_DIR/" 2>/dev/null || true
+    if [[ "$EXPERT_MODE" == "false" ]]; then
+        echo "✅ Copied Claude commands to $CLAUDE_COMMANDS_DIR"
+    fi
+else
+    if [[ "$EXPERT_MODE" == "false" ]]; then
+        echo "📁 No commands directory found, skipping Claude commands setup"
+    fi
+fi
+
 # Show completion message if not in expert mode
 if [[ "$EXPERT_MODE" == "false" ]]; then
     echo ""
@@ -72,4 +88,7 @@ if [[ "$EXPERT_MODE" == "false" ]]; then
     echo "💡 The bootstrap aliases will load automatically in new shells"
     echo "💡 You can add more numbered scripts to ~/.oh-my-zsh/custom/ (e.g., 002_*, 003_*)"
     echo "💡 They will load in numerical order"
+    if [[ -d "commands" ]]; then
+        echo "💡 Claude commands have been installed to ~/.claude/commands"
+    fi
 fi 

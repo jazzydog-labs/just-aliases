@@ -1,0 +1,8 @@
+Please analyze the alias mode file {{MODE_NAME}} in the aliases/ directory and provide:
+
+1. A summary of what this mode is for
+2. List each alias with a brief explanation
+3. Any suggestions for improving the aliases (shorter names, better organization, etc.)
+4. Whether there are any potential conflicts or security concerns
+
+If the mode doesn't exist, list the available modes instead.
