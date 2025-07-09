@@ -35,6 +35,7 @@ alias jd="just demo"
 alias r="glow"
 alias t='tree -I "__pycache__|node_modules|htmlcov"'
 alias j="just"
+alias lt="loom just test-silent"
 
 # genesis helpers
 alias genesis="poetry run genesis"
