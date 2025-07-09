@@ -31,6 +31,10 @@ if alias | grep -q "g"; then
 fi
 # testing helpers
 alias jt="just test"
+alias jd="just demo"
 alias r="glow"
 alias t='tree -I "__pycache__|node_modules|htmlcov"'
 alias j="just"
+
+# genesis helpers
+alias genesis="poetry run genesis"
