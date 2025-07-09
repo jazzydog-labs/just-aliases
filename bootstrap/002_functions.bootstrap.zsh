@@ -227,6 +227,8 @@ function _g_completion() {
         "panorama"
         "bill-of-materials"
         "just-aliases"
+        "genesis"
+        "golden-snapshot"
         "loom"
         "forge"
         "crucible"
